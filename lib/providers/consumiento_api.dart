@@ -1,6 +1,14 @@
+import 'package:examen_asael/models/modelos.dart';
 import 'package:flutter/material.dart';
 
 class ConsumiendoApiProvider with ChangeNotifier {
+  List<int> _cantidad = cantidadKyary;
+  List<int> get cantidad => _cantidad;
+  void setcantidad({required int cantidad, required int index}) {
+    _cantidad[index] = cantidad;
+    notifyListeners();
+  }
+
   PageController _pageController = PageController(initialPage: 0);
   PageController get pageController => _pageController;
   void setPageController(PageController dato) {
@@ -16,11 +24,14 @@ class ConsumiendoApiProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  int _seleccionadoBottom = 0;
-
-  final PageController _pageControllerMain = PageController(initialPage: 0);
+  PageController _pageControllerMain = PageController(initialPage: 0);
   PageController get pageControllerMain => _pageControllerMain;
+  void setpageControllerMain(PageController dato) {
+    _pageControllerMain = dato;
+    // notifyListeners();
+  }
 
+  int _seleccionadoBottom = 0;
   int getseleccionadoBottom() => _seleccionadoBottom;
   void setseleccionadoBottom(int dato) {
     _seleccionadoBottom = dato;
@@ -30,5 +41,6 @@ class ConsumiendoApiProvider with ChangeNotifier {
       curve: Curves.easeInOut,
       duration: Duration(milliseconds: 500),
     );
+    print(_pageControllerMain.page);
   }
 }

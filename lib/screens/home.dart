@@ -61,9 +61,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     SizedBox(
                       height: size.height * 0.6,
-                      child: Image.asset(
-                        tutorialLista[index].imagen,
-                        fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: size.width * 0.9,
+                        child: Image.asset(
+                          tutorialLista[index].imagen,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     Container(
@@ -135,26 +138,31 @@ class _CuadroVerde extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: GestureDetector(
-                    child: Container(
-                      width: 100,
-                      height: 70,
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'SKIP',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      child: Container(
+                        width: 100,
+                        height: 70,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'SKIP',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    onTap: () => Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (BuildContext context) => LoginPage(),
-                      ),
-                    ),
-                  ),
+                      onTap: () {
+                        Provider.of<ConsumiendoApiProvider>(context,
+                                listen: false)
+                            .setCurrentPage(0);
+
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (BuildContext context) => LoginPage(),
+                          ),
+                        );
+                      }),
                 ),
                 Expanded(
                   flex: 3,
@@ -200,13 +208,33 @@ class _CuadroVerde extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      print('ira we de programar');
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (BuildContext context) => LoginPage(),
-                        ),
-                      );
+                      final controllerPageProvider =
+                          Provider.of<ConsumiendoApiProvider>(context,
+                                  listen: false)
+                              .pageController;
+
+                      final paginaActual = Provider.of<ConsumiendoApiProvider>(
+                              context,
+                              listen: false)
+                          .currentPage;
+
+                      if (paginaActual < tutorialLista.length - 1) {
+                        controllerPageProvider.nextPage(
+                          curve: Curves.easeInOut,
+                          duration: const Duration(milliseconds: 500),
+                        );
+                      } else {
+                        Provider.of<ConsumiendoApiProvider>(context,
+                                listen: false)
+                            .setCurrentPage(0);
+
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (BuildContext context) => LoginPage(),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ),

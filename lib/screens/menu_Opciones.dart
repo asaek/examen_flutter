@@ -1,3 +1,4 @@
+import 'package:examen_asael/models/modelos.dart';
 import 'package:examen_asael/providers/providers.dart';
 import 'package:examen_asael/screens/screens.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,30 +8,13 @@ import 'package:provider/provider.dart';
 class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final controllerMainMenu =
-        Provider.of<ConsumiendoApiProvider>(context, listen: true)
-            .pageControllerMain;
-
     return Scaffold(
       body: Column(
         children: [
           // TODO mover el appbar junto con el pageview
           _Appbar(),
           Expanded(
-            child: Container(
-              child: PageView(
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                controller: controllerMainMenu,
-                children: [
-                  CategoriasPage(),
-                  OPcionHomePage(),
-                  Container(color: Colors.green),
-                  Container(color: Colors.yellow),
-                  Container(color: Colors.orange),
-                ],
-              ),
-            ),
+            child: _PageViewFull(),
           ),
           Row(
             children: const [
@@ -40,24 +24,61 @@ class MenuPage extends StatelessWidget {
               ),
               BotonBottom(
                 seleccionado: 1,
-                icono: Icons.home,
+                icono: Icons.local_offer,
               ),
               BotonBottom(
                 seleccionado: 2,
-                icono: Icons.home,
+                icono: Icons.window,
               ),
               BotonBottom(
                 seleccionado: 3,
-                icono: Icons.home,
+                icono: Icons.person,
               ),
               BotonBottom(
                 seleccionado: 4,
-                icono: Icons.home,
+                icono: Icons.shopping_cart,
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _PageViewFull extends StatefulWidget {
+  @override
+  State<_PageViewFull> createState() => _PageViewFullState();
+}
+
+class _PageViewFullState extends State<_PageViewFull> {
+  PageController controladorPageView = PageController(initialPage: 0);
+  @override
+  void initState() {
+    Provider.of<ConsumiendoApiProvider>(context, listen: false)
+        .setpageControllerMain(controladorPageView);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      scrollDirection: Axis.horizontal,
+      physics: const NeverScrollableScrollPhysics(),
+      controller: controladorPageView,
+      children: [
+        OPcionHomePage(),
+        CategoriasPage(),
+        CopiaHomeJajajajaPage(),
+        Container(color: Colors.yellow),
+        Container(color: Colors.orange),
+      ],
     );
   }
 }
@@ -104,8 +125,12 @@ class BotonBottom extends StatelessWidget {
 class _Appbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
+    final size = MediaQuery.of(context).size;
+    final tituloSeleccionado =
+        Provider.of<ConsumiendoApiProvider>(context, listen: true)
+            .getseleccionadoBottom();
+    return SizedBox(
+      height: size.height * 0.1,
       child: SafeArea(
         bottom: false,
         child: Stack(
@@ -113,12 +138,12 @@ class _Appbar extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               color: Colors.white,
-              child: const Text(
-                'Home',
-                style: TextStyle(
+              child: Text(
+                menuTitulo[tituloSeleccionado].titulo,
+                style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontSize: 15,
                 ),
               ),
             ),

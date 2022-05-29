@@ -35,20 +35,83 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
+                  Container(
+                    height: 65,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 8,
+                          offset: Offset(0, 0), // Shadow position
+                        ),
+                      ],
                     ),
+                    child: TextField(
+                      cursorColor: Colors.green,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: 'Correo Electronico',
+                        labelStyle: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 15,
+                        ),
+                        icon: Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 0), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.email,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
                     child: Container(
                       height: 65,
-                      color: Colors.white,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 8,
+                            offset: Offset(0, 0), // Shadow position
+                          ),
+                        ],
+                      ),
                       child: TextField(
+                        cursorColor: Colors.green,
                         decoration: InputDecoration(
-                          // border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-
                           border: InputBorder.none,
-
-                          labelText: 'Correo Electronico',
+                          labelText: 'Password',
+                          labelStyle: const TextStyle(
+                            color: Colors.green,
+                            fontSize: 15,
+                          ),
                           icon: Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Container(
@@ -75,56 +138,22 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      child: Container(
-                        height: 65,
-                        color: Colors.white,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            // border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-
-                            border: InputBorder.none,
-
-                            // hintText: 'Password',
-                            labelText: 'Password',
-                            icon: Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 8,
-                                      offset: Offset(0, 0), // Shadow position
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.email,
-                                  color: Colors.green,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    child: Container(
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Forgot Password',
+                        style: TextStyle(color: Colors.green),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 50,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Forgot Password',
-                      style: TextStyle(color: Colors.green),
+                    onTap: () => Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (BuildContext context) =>
+                            PasswordPedirdoPage(),
+                      ),
                     ),
                   ),
                   Padding(
@@ -295,10 +324,13 @@ class _Appbar extends StatelessWidget {
                 'Sign In',
                 style: TextStyle(
                   color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
                 ),
               ),
             ),
             GestureDetector(
+              behavior: HitTestBehavior.translucent,
               child: const SizedBox(
                 width: 70,
                 height: 100,

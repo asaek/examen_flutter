@@ -3,7 +3,7 @@ import 'package:examen_asael/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OPcionHomePage extends StatelessWidget {
+class CopiaHomeJajajajaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -19,13 +19,13 @@ class OPcionHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
                   Text(
-                    'All Categories',
+                    'Hot Deal:',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'View All',
+                    'Limite Offer',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.orangeAccent,
@@ -34,61 +34,7 @@ class OPcionHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                itemCount: listViewListaTopCategorias.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) => Padding(
-                  padding: const EdgeInsets.only(
-                      right: 10, left: 10, bottom: 5, top: 5),
-                  child: Container(
-                    width: 105,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 8,
-                          offset: Offset(0, 0), // Shadow position
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 55,
-                            child: Image.asset(
-                                listViewListaTopCategorias[index].imagen),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 6,
-                              left: 2,
-                              right: 2,
-                            ),
-                            child: Text(
-                              listViewListaTopCategorias[index].titulo,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            _PrimeraListaOfertas(),
             Padding(
               padding: const EdgeInsets.only(top: 15, left: 12, right: 12),
               child: SizedBox(
@@ -97,57 +43,57 @@ class OPcionHomePage extends StatelessWidget {
                   alignment: WrapAlignment.spaceBetween,
                   direction: Axis.horizontal,
                   children: const [
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable.png',
                       texto: 'Kyary Trasero',
                       index: 0,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable2.png',
                       texto: 'Kyary Feliz',
                       index: 1,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable3.png',
                       texto: 'Kyary Riendo',
                       index: 2,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable4.png',
                       texto: 'Kyary Agradeciendo',
                       index: 3,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable5.png',
                       texto: 'Kyary Buenas Noches',
                       index: 4,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable6.png',
                       texto: 'Kyary Gracias',
                       index: 5,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable7.png',
                       texto: 'Kyary Posando',
                       index: 6,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable8.png',
                       texto: 'Kyary Admirando',
                       index: 7,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable9.png',
                       texto: 'Kyary mmmmmm',
                       index: 8,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable10.png',
                       texto: 'Kyary Corriendo',
                       index: 9,
                     ),
-                    ItemWrap(
+                    _ItemWrap(
                       imagen: 'assets/kyaryTable11.png',
                       texto: 'Kyary おやすみ',
                       index: 10,
@@ -163,12 +109,212 @@ class OPcionHomePage extends StatelessWidget {
   }
 }
 
-class ItemWrap extends StatelessWidget {
+class _PrimeraListaOfertas extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 160,
+      child: ListView.builder(
+        itemCount: listViewListaTopCategorias.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding:
+              const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
+          child: Container(
+            width: 150,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 8,
+                  offset: Offset(0, 0), // Shadow position
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                const _LetrerosDescuentoTop(),
+                Column(
+                  children: [
+                    const SizedBox(
+                      width: double.infinity,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: SizedBox(
+                        height: 85,
+                        width: 85,
+                        child: Image.asset(
+                            listViewListaTopCategorias[index].imagen),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 6,
+                      ),
+                      child: Text(
+                        listViewListaTopCategorias[index].titulo,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, right: 7, left: 7),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Price: \$20.00',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              color: Colors.orangeAccent,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                child: Container(
+                                  height: 15,
+                                  width: 15,
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromARGB(255, 176, 217, 178),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ),
+                                onTap: () {
+                                  // if (cantidadK[index] > 0) {
+                                  //   cantidadK[index] = cantidadK[index] - 1;
+                                  //   Provider.of<ConsumiendoApiProvider>(context,
+                                  //           listen: false)
+                                  //       .setcantidad(
+                                  //           cantidad: cantidadK[index], index: index);
+                                  // }
+                                },
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child: Text(
+                                  '0',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                              GestureDetector(
+                                child: Container(
+                                  height: 15,
+                                  width: 15,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ),
+                                onTap: () {
+                                  // if (cantidadK[index] > 0) {
+                                  //   cantidadK[index] = cantidadK[index] - 1;
+                                  //   Provider.of<ConsumiendoApiProvider>(context,
+                                  //           listen: false)
+                                  //       .setcantidad(
+                                  //           cantidad: cantidadK[index], index: index);
+                                  // }
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LetrerosDescuentoTop extends StatelessWidget {
+  const _LetrerosDescuentoTop({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 15,
+          width: 45,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 255, 115, 0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(5),
+              bottomLeft: Radius.circular(5),
+              bottomRight: Radius.circular(5),
+              topRight: Radius.circular(5),
+            ),
+          ),
+          child: const Text(
+            '10% Off',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+          ),
+        ),
+        Container(
+          height: 15,
+          width: 40,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(5),
+              bottomLeft: Radius.circular(5),
+              bottomRight: Radius.circular(5),
+              topRight: Radius.circular(5),
+            ),
+          ),
+          child: const Text(
+            '12pcs',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ItemWrap extends StatelessWidget {
   final String imagen;
   final String? texto;
   final int index;
 
-  const ItemWrap({required this.imagen, this.texto, required this.index});
+  const _ItemWrap({required this.imagen, this.texto, required this.index});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
